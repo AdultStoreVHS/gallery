@@ -1,33 +1,37 @@
-//Top is blind attempt
-//Create game function call
-function playRound(){
-    //get user input for PRC option
-    let playerChoice = prompt('Select Rock paper or scissors').toLowerCase();
 
-    //generate random number 0-2 for CPU choice
-    let randomNumber = Math.floor(Math.random()*3);
+//elements
+const playerScore = document.querySelector('.palyerScore');
+const computerScore = document.querySelector('.computerScore');
+const rockBtn = document.querySelector('.rock');
+const paperBtn = document.querySelector('.paper');
+const scissorsBtn = document.querySelector('.scissors');
+const options = document.querySelector('.options');
+const startBtn = document.querySelector('.start');
 
-    //select CPU choice based of random number
-    let computerChoice;
-    if(randomNumber == 0){
-        computerChoice = 'rock';
-    } else if (randomNumber == 1){
-        computerChoice = 'paper'
-    } else{
-        computerChoice = 'scissors'
-    }
-
-    //compare Player vs CPU for result
-    if(playerChoice == computerChoice){
-        console.log('Draw');
-    }else if( (playerChoice == 'rock' && computerChoice == 'scissors') || (playerChoice == 'scissors' && computerChoice == 'paper') || (playerChoice == 'paper' && computerChoice == 'rock')){
-        console.log('Player wins');
-    }else { 
-        console.log('Computer wins');
-    }
+// get players choice
+let playerChoice;
+function getPlayer(){
+    options.addEventListener('click',(e)=>playerChoice = e.target.innerHTML);
+    return playerChoice;
 }
 
-//run game 5 times
-for (let i = 0; i < 5; i++){
-    playRound();
+//get computer choice 
+let computerChoice;
+function getComputer(){
+    let randNum = Math.floor(Math.random()*3)
+    if(randNum == 0){
+        computerChoice = 'rock'
+    } else if (randNum == 1){
+        computerChoice = 'paper'
+    } else {
+        computerChoice = 'scissors'
+    }
+    return computerChoice;
+}
+
+//get winner
+function getWinner(){
+    getPlayer();
+    getComputer();
+    return (`${playerChoice} is like ${computerChoice}`);
 }
